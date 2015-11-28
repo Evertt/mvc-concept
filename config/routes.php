@@ -5,25 +5,26 @@
 // One benefit of using a php-file is that you don't 
 // need an extra config file for defining namespaces.
 
-use App\Views;
-use App\Contracts;
-use App\Controllers;
-use App\Model\Repositories;
+use App\Views\ListView;
+use App\Contracts\Listable;
+use App\Contracts\Paginatable;
+use App\Controllers\PageController;
+use App\Model\Repositories\UserRepository;
 
 return [
     [
-        'get'                        => 'users',
-        'view'                       => Views\ListView::class,
-        'template'                   => 'list',
-        Contracts\Listable::class    => Repositories\UserRepository::class,
+        'get'              => 'users',
+        'view'             => ListView::class,
+        'template'         => 'list',
+        Listable::class    => UserRepository::class,
     ],
     [
-        'get'                        => 'users/:id',
-        'action'                     => [Controllers\PageController::class, 'index'],
-        'view'                       => Views\ListView::class,
-        'template'                   => 'list',
-        Contracts\Listable::class    => UserRepository::class,
-        Contracts\Paginatable::class => UserRepository::class,
+        'get'              => 'users/:id',
+        'action'           => [PageController::class, 'index'],
+        'view'             => ListView::class,
+        'template'         => 'list',
+        Listable::class    => UserRepository::class,
+        Paginatable::class => UserRepository::class,
     ]
 ];
 
@@ -31,9 +32,9 @@ return [
 
 $router
     ->get('users/:id')
-    ->action(Controllers\UserController::class, 'index')
-    ->view(Views\ListView::class, 'list')
+    ->action(PageController::class, 'index')
+    ->view(ListView::class, 'list')
     ->bind([
-        Contracts\Listable::class    => UserRepository::class,
-        Contracts\Paginatable::class => UserRepository::class
+        Listable::class    => UserRepository::class,
+        Paginatable::class => UserRepository::class
     ]);
