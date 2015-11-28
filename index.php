@@ -7,7 +7,9 @@ use Illuminate\Contracts\Container\Container as ContainerInterface;
 
 require_once('vendor/autoload.php');
 
-$method = 'get'; $path = 'users/2';
+$method = 'get';
+$defaultPath = '/users';
+$path = trim(array_get($argv, 1, $defaultPath), '/');
 
 $ioc = new Container;
 $getContainer = function() use ($ioc) {return $ioc;};

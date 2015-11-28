@@ -21,6 +21,10 @@ class Router
         $this->path   = $path;
         $route = array_first($this->routes, [$this, 'match']);
 
+        if (is_null($route)) {
+            die("No matching route found.\n");
+        }
+
         return $route + $this->params;
     }
 
