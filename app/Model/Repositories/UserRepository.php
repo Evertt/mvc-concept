@@ -34,9 +34,9 @@ class UserRepository extends Repository implements Listable, Paginatable
 
     public function getList()
     {
-        $entities   = $this->orm->getAll();
-        $collection = new Collection($entities);
+        $entities = $this->orm->getAll();
+        $emails = (new Collection($entities))->lists('email');
 
-        return $collection->forPage($this->page, $this->perPage);
+        return $emails->forPage($this->page, $this->perPage);
     }
 }

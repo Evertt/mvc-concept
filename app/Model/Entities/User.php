@@ -3,8 +3,10 @@
 /**
 * User
 */
-class User
+class User implements \ArrayAccess
 {
+    use Traits\AccessibleProperties;
+    
     private $id;
     private $email;
     private $password;
@@ -28,10 +30,5 @@ class User
     public function setPassword($password)
     {
         $this->password = sha1($password);
-    }
-
-    public function __toString()
-    {
-        return $this->email;
     }
 }

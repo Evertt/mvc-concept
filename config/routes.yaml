@@ -13,5 +13,5 @@
 -
   get         : posts
   view        : ListView
-  template    : list
+  template    : definition-list
   Listable    : PostRepository

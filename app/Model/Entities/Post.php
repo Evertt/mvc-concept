@@ -3,8 +3,10 @@
 /**
 * Post
 */
-class Post
+class Post implements \ArrayAccess
 {
+    use Traits\AccessibleProperties;
+    
     private $id;
     private $title;
     private $body;
@@ -25,13 +27,13 @@ class Post
         $this->title = $title;
     }
 
+    public function getBody()
+    {
+        return $this->body;
+    }
+
     public function setBody($body)
     {
         $this->body = sha1($body);
-    }
-
-    public function __toString()
-    {
-        return $this->title;
     }
 }

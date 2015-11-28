@@ -13,6 +13,6 @@ class PostRepository extends Repository implements Listable
         $entities   = $this->orm->getAll();
         $collection = new Collection($entities);
 
-        return $collection;
+        return $collection->lists('body', 'title');
     }
 }
