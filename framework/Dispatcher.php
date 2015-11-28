@@ -57,25 +57,4 @@ class Dispatcher
 
         return new View($view, $template);
     }
-
-    private function getBindingMethods($view)
-    {
-        $class = new ReflectionClass($view);
-        $methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
-        $methodNames = array_pluck($methods, 'name');
-        $filter = [$this, 'filterGetMethods'];
-
-        return array_filter($methodNames, $filter);
-    }
-
-    public function filterGetMethods($method)
-    {
-        return starts_with($method, 'get');
-    }
-
-    private function render($template, $data)
-    {
-        extract($data);
-        include "templates/$template.php";
-    }
 }
