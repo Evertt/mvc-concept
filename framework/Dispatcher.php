@@ -1,7 +1,5 @@
 <?php namespace Framework;
 
-use ReflectionClass;
-use ReflectionMethod;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -29,8 +27,8 @@ class Dispatcher
         }
 
         if (isset($route['view'])) {
-            $data = $this->getData($route['view']);
-            $this->render($route['template'], $data);
+            $view = $this->makeView($route['view'], $route['template']);
+            $view->render();
         }
     }
 
@@ -52,19 +50,12 @@ class Dispatcher
         call_user_func([$controller, $method], $param);
     }
 
-    private function getData($view)
+    private function makeView($view, $template)
     {
         $view = addNamespace($view);
         $view = $this->ioc->make($view);
-        $methods = $this->getBindingMethods($view);
-        $data = [];
 
-        foreach ($methods as $method) {
-            $key = lcfirst(substr($method, 3));
-            $data[$key] = $view->{$method}();
-        }
-
-        return $data;
+        return new View($view, $template);
     }
 
     private function getBindingMethods($view)
