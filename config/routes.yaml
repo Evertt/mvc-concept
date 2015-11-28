@@ -1,0 +1,11 @@
+-
+  get        : users
+  Listable   : UserRepository
+  view       : ListView
+  template   : list
+-
+  get        : users/:id
+  Listable   : UserRepository
+  action     : UserController@index
+  view       : ListView
+  template   : list
