@@ -13,7 +13,7 @@ abstract class Repository
     {
         // initFromRepository is used so
         // that the orm can determine which
-        // table and entity class to use
+        // table and entity-class to use
         $this->orm = $orm->initFromRepository($this);
     }
 }

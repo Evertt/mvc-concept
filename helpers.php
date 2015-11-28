@@ -2,10 +2,9 @@
 
 function config($key)
 {
-    $namespaces  = yaml_parse_file('config/namespaces.yaml' );
-    $routes      = yaml_parse_file('config/routes.yaml'     );
-    $view_models = yaml_parse_file('config/view-models.yaml');
-    $config = compact('namespaces', 'routes', 'view_models' );
+    $namespaces  = yaml_parse_file('config/namespaces.yaml');
+    $routes      = yaml_parse_file('config/routes.yaml');
+    $config      = compact('namespaces', 'routes');
 
     return array_get($config, $key);
 }

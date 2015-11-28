@@ -1,11 +1,17 @@
 -
-  get        : users
-  Listable   : UserRepository
-  view       : ListView
-  template   : list
+  get         : users
+  view        : ListView
+  template    : list
+  Listable    : UserRepository
 -
-  get        : users/:id
-  Listable   : UserRepository
-  action     : UserController@index
-  view       : ListView
-  template   : list
+  get         : users/:id
+  action      : PageController@index
+  view        : ListView
+  template    : list
+  Listable    : UserRepository
+  Paginatable : UserRepository
+-
+  get         : posts
+  view        : ListView
+  template    : list
+  Listable    : PostRepository

@@ -1,15 +1,15 @@
 <?php namespace App\Controllers;
 
-use App\Model\Repositories\UserRepository;
+use App\Contracts\Paginatable;
 
 /**
-* User Controller
+* Page Controller
 */
-class UserController
+class PageController
 {
     private $repository;
 
-    function __construct(UserRepository $repository)
+    function __construct(Paginatable $repository)
     {
         $this->repository = $repository;
     }
