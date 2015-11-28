@@ -1,6 +1,6 @@
 <dl>
-    <? foreach($items as $key => $value): ?>
+    <?php foreach($items as $key => $value): ?>
         <dt><?= $key ?></dt>
         <dd><?= $value ?></dd>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </dl>

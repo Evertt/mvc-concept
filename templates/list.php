@@ -1,5 +1,5 @@
 <ul>
-    <? foreach($items as $item): ?>
+    <?php foreach($items as $item): ?>
         <li><?= $item ?></li>
-    <? endforeach; ?>
+    <?php endforeach; ?>
 </ul>
