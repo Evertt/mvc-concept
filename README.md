@@ -8,7 +8,7 @@ This has worked well to make everything very reusable. As you can see in `/confi
 
 One thing you might love or you might hate is the way I bind data from the view to the template. Basically, when you make a view class, all the public methods beginning with the word "get" will be used to bind data to the template. So for example, if your view class has a method called `getItems()` then whatever that returns will be mapped to `$items` in the template. Maybe it's a little bit magic, but I think it helps to keep the code much cleaner.
 
-Download the code, run `composer install` and test if it works. The way I test this application is by running either the following commands in the terminal:
+Download the code, run `composer install` and test if it works. The way I test this application is by running either of the following commands in the terminal:
 
 ```
 $ php index.php /users
