@@ -1,6 +1,6 @@
 # MVC-concept
 
-This proof of concept is inspired by the blog article ["Views are not templates"](Model-View-Confusion: In MVC the View gets its own data ...).
+This proof of concept is inspired by the blog article ["Views are not templates"](https://r.je/views-are-not-templates.html).
 
 So this is an implementation of MVC where the controller is not the middle-man between the model and the view. Instead the view-layer has become more comprehensive. Where before the view was nothing more than a template, now the view layer consists of a view-model (which I just call the view) as well as a template.
 
