@@ -7,11 +7,11 @@ use Illuminate\Contracts\Container\Container;
 */
 class Dispatcher
 {
-    private $ioc;
+    private $container;
 
-    public function __construct(Container $ioc)
+    public function __construct(Container $container)
     {
-        $this->ioc = $ioc;
+        $this->container = $container;
     }
 
     public function dispatch($route)
@@ -37,8 +37,8 @@ class Dispatcher
         foreach($dependencies as $interface => $binding) {
             $binding = addNamespace($binding);
             $interface = addNamespace($interface);
-            $this->ioc->singleton($binding);
-            $this->ioc->bind($interface, $binding);
+            $this->container->singleton($binding);
+            $this->container->bind($interface, $binding);
         }
     }
 
@@ -46,14 +46,14 @@ class Dispatcher
     {
         list($controller, $method) = explode('@', $action);
         $controller = addNamespace($controller);
-        $controller = $this->ioc->make($controller);
+        $controller = $this->container->make($controller);
         call_user_func([$controller, $method], $param);
     }
 
     private function makeView($view, $template)
     {
         $view = addNamespace($view);
-        $view = $this->ioc->make($view);
+        $view = $this->container->make($view);
 
         return new View($view, $template);
     }

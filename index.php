@@ -7,17 +7,26 @@ use Illuminate\Contracts\Container\Container as ContainerInterface;
 
 require_once('vendor/autoload.php');
 
-$method = 'get';
-$defaultPath = '/users';
+$httpMethod = 'get'; $defaultPath = '/users';
+
+// Get the path from the arguments given
+// in the CLI, or use the default path
 $path = trim(array_get($argv, 1, $defaultPath), '/');
 
-$ioc = new Container;
-$getContainer = function() use ($ioc) {return $ioc;};
-$ioc->bind(ContainerInterface::class, $getContainer);
-$ioc->singleton(Container::class, $getContainer);
+// Instantiate the DI container and
+// make sure every time a class needs it,
+// it gets this very instance of it.
+$container = new Container;
+$getContainer = function() use ($container) {return $container;};
+$container->bind(ContainerInterface::class, $getContainer);
+$container->singleton(Container::class, $getContainer);
 
-$router = $ioc[Router::class];
-$dispatcher = $ioc[Dispatcher::class];
+// Get the framework router and
+// dispatcher from the container
+$router = $container[Router::class];
+$dispatcher = $container[Dispatcher::class];
 
-$route = $router->route($method, $path);
+// get route from the path and http-method
+$route = $router->route($httpMethod, $path);
+// dispatch the route
 $dispatcher->dispatch($route);
