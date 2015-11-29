@@ -10,20 +10,20 @@ class Router
     private $routes;
     private $params;
  
-    function __construct()
+    public function __construct()
     {
         $router = $this;
         include('config/routes.php');
     }
 
-    function get($path)
+    public function get($path)
     {
         $route = new Route('GET', $path);
 
         return $this->routes[] = $route;
     }
 
-    function route($verb, $path)
+    public function route($verb, $path)
     {
         $route = array_first(
             $this->routes,

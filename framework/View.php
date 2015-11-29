@@ -11,13 +11,13 @@ class View
     private $view;
     private $template;
 
-    function __construct($view, $template)
+    public function __construct($view, $template)
     {
         $this->view     = $view;
         $this->template = $template;
     }
 
-    function getData()
+    private function getData()
     {
         $view = $this->view;
         $methods = $this->getBindingMethods($view);
@@ -31,22 +31,18 @@ class View
         return $data;
     }
 
-    function getBindingMethods($view)
+    private function getBindingMethods($view)
     {
-        $class = new ReflectionClass($view);
-        $methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+        $reflection = new ReflectionClass($view);
+        $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
         $methodNames = array_pluck($methods, 'name');
-        $filter = [$this, 'filterGetMethods'];
 
-        return array_filter($methodNames, $filter);
+        return array_filter($methodNames, function($method) {
+            return starts_with($method, 'get');
+        });
     }
 
-    function filterGetMethods($method)
-    {
-        return starts_with($method, 'get');
-    }
-
-    function render()
+    public function render()
     {
         $template = $this->template;
         $data     = $this->getData();

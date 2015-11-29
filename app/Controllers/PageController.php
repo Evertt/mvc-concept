@@ -9,12 +9,12 @@ class PageController
 {
     private $repository;
 
-    function __construct(Paginatable $repository)
+    public function __construct(Paginatable $repository)
     {
         $this->repository = $repository;
     }
 
-    function index($page)
+    public function index($page)
     {
         $this->repository->setPage($page);
     }

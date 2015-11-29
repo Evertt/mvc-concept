@@ -16,13 +16,13 @@ class Route
     private $dependencies = [];
     private $controllerParameters = [];
 
-    function __construct($verb, $path)
+    public function __construct($verb, $path)
     {
         $this->verb = $verb;
         $this->path = preg_replace('/:\w+/', '(\d+)', $path);
     }
 
-    function action($controller, $method = '__invoke', $dependencies = [])
+    public function action($controller, $method = '__invoke', $dependencies = [])
     {
         if (is_array($method)) {
             list($method, $dependencies) = ['__invoke', $method];
@@ -35,7 +35,7 @@ class Route
         return $this;
     }
 
-    function view($view, $template = null, $dependencies = [])
+    public function view($view, $template = null, $dependencies = [])
     {
         if (is_array($template) || is_null($template)) {
             $dependencies = (array) $template;
@@ -51,14 +51,14 @@ class Route
         return $this;
     }
 
-    function bind(array $dependencies)
+    public function bind(array $dependencies)
     {
         $this->dependencies = $dependencies;
 
         return $this;
     }
 
-    function match($verb, $path)
+    public function match($verb, $path)
     {
         if ($verb !== $this->verb) return false;
 
@@ -69,7 +69,7 @@ class Route
         return $result;
     }
 
-    function __get($var)
+    public function __get($var)
     {
         return $this->$var;
     }
