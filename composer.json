@@ -9,7 +9,8 @@
     "require": {
         "php-di/php-di": "^5.1",
         "illuminate/container": "^5.1",
-        "illuminate/support": "^5.1"
+        "illuminate/support": "^5.1",
+        "symfony/yaml": "^2.7"
     },
     "autoload": {
         "psr-4": {

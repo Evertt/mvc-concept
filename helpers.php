@@ -1,9 +1,11 @@
 <?php
 
+use Symfony\Component\Yaml\Yaml;
+
 function config($key)
 {
-    $namespaces  = yaml_parse_file('config/namespaces.yaml');
-    $routes      = yaml_parse_file('config/routes.yaml');
+    $namespaces  = Yaml::parse(file_get_contents('config/namespaces.yaml'));
+    $routes      = Yaml::parse(file_get_contents('config/routes.yaml'));
     $config      = compact('namespaces', 'routes');
 
     return array_get($config, $key);
