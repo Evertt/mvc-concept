@@ -1,8 +1,8 @@
 <?php namespace App\Model\Repositories;
 
+use Framework\Repository;
 use App\Contracts\Listable;
 use App\Contracts\Paginatable;
-use Illuminate\Support\Collection;
 
 /**
 * User repository
@@ -34,8 +34,8 @@ class UserRepository extends Repository implements Listable, Paginatable
 
     public function getList()
     {
-        $entities = $this->orm->getAll();
-        $emails = (new Collection($entities))->lists('email');
+        $users  = $this->orm->getAll();
+        $emails = $users->lists('email');
 
         return $emails->forPage($this->page, $this->perPage);
     }

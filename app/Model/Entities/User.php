@@ -3,10 +3,8 @@
 /**
 * User
 */
-class User implements \ArrayAccess
+class User
 {
-    use Traits\AccessibleProperties;
-    
     private $id;
     private $email;
     private $password;

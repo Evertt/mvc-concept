@@ -1,7 +1,7 @@
 <?php namespace App\Model\Repositories;
 
+use Framework\Repository;
 use App\Contracts\Listable;
-use Illuminate\Support\Collection;
 
 /**
 * Post repository
@@ -10,9 +10,8 @@ class PostRepository extends Repository implements Listable
 {
     public function getList()
     {
-        $entities   = $this->orm->getAll();
-        $collection = new Collection($entities);
+        $posts = $this->orm->getAll();
 
-        return $collection->lists('body', 'title');
+        return $posts->lists('body', 'title');
     }
 }

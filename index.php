@@ -5,6 +5,7 @@ use Framework\Dispatcher;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\Container as ContainerInterface;
 
+require_once('laravel-helper-override.php');
 require_once('vendor/autoload.php');
 
 $httpMethod = 'get'; $defaultPath = '/users';
@@ -21,7 +22,7 @@ $getContainer = function() use ($container) {return $container;};
 $container->bind(ContainerInterface::class, $getContainer);
 $container->singleton(Container::class, $getContainer);
 
-// Get the framework router and
+// Get the framework-router and
 // dispatcher from the container
 $router = $container[Router::class];
 $dispatcher = $container[Dispatcher::class];
