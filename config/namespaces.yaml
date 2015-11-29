@@ -1,5 +1,0 @@
-views: App\Views
-contracts: App\Contracts
-entities: App\Model\Entities
-controllers: App\Controllers
-repositories: App\Model\Repositories

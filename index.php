@@ -8,7 +8,7 @@ use Illuminate\Contracts\Container\Container as ContainerInterface;
 require_once('laravel-helper-override.php');
 require_once('vendor/autoload.php');
 
-$httpMethod = 'get'; $defaultPath = '/users';
+$httpMethod = 'GET'; $defaultPath = '/users';
 
 // Get the path from the arguments given
 // in the CLI, or use the default path

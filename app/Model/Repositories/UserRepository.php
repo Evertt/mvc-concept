@@ -1,16 +1,23 @@
 <?php namespace App\Model\Repositories;
 
-use Framework\Repository;
+use Framework\ORM;
 use App\Contracts\Listable;
+use App\Model\Entities\User;
 use App\Contracts\Paginatable;
 
 /**
 * User repository
 */
-class UserRepository extends Repository implements Listable, Paginatable
+class UserRepository implements Listable, Paginatable
 {
+    private $orm;
     private $page = 1;
     private $perPage = 5;
+
+    public function __construct(ORM $orm)
+    {
+        $this->orm = $orm->setEntity(User::class);
+    }
 
     public function getPage()
     {

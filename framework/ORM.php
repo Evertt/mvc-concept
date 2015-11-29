@@ -9,12 +9,9 @@ class ORM
 {
     private $entity;
 
-    public function initFromRepository($repository)
+    public function setEntity($entity)
     {
-        $repositoryName = class_basename($repository);
-        $entityName = substr($repositoryName, 0, -10);
-
-        $this->entity = config('namespaces.entities') . "\\$entityName";
+        $this->entity = $entity;
 
         return $this;
     }

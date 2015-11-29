@@ -12,26 +12,30 @@ class Router
  
     function __construct()
     {
-        $this->routes = config('routes');
+        $router = $this;
+        include('config/routes.php');
     }
 
-    public function route($method, $path)
+    function get($path)
     {
-        $this->method = $method;
-        $this->path   = $path;
-        $route = array_first($this->routes, [$this, 'match']);
+        $route = new Route('GET', $path);
+
+        return $this->routes[] = $route;
+    }
+
+    function route($verb, $path)
+    {
+        $route = array_first(
+            $this->routes,
+            function($i, $route) use ($verb, $path) {
+                return $route->match($verb, $path);
+            }
+        );
 
         if (is_null($route)) {
             die("No matching route found.\n");
         }
 
-        return $route + $this->params;
-    }
-
-    public function match($key, $value)
-    {
-        $route = $value[$this->method];
-        $route = preg_replace('/:\w+/', '(\d+)', $route);
-        return preg_match("(^$route$)", $this->path, $this->params);
+        return $route;
     }
 }
